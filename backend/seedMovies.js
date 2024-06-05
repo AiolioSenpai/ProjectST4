@@ -26,8 +26,14 @@ async function seedDatabase() {
 
     const movies = await fetchMoviesFromApi();
     const filteredMovies = movies.map(movie => ({
+      id : movie.id,
       title: movie.title,
       release_date: movie.release_date,
+      vote_average: movie.vote_average,
+      poster_path: movie.poster_path,
+      genre_ids : movie.genre_ids,
+      overview: movie.overview
+
     }));
     console.log(filteredMovies);
 
