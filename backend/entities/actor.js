@@ -6,7 +6,6 @@ const Actor = new typeorm.EntitySchema({
     id_actor: {
       primary: true,
       type: Number,
-      generated: true,
     },
     actor_name: { type: String },
     image: { type: String },
