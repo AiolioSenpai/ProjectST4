@@ -7,7 +7,8 @@ const API_KEY =
 
 async function fetchMoviesFromApi() {
   const movieIdList = [];
-  for (let i = 1; i <= 10; i++) {
+  const moviesData = [];
+  for (let i = 1; i <= 20; i++) {
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/top_rated?page=${i}`,
@@ -26,7 +27,7 @@ async function fetchMoviesFromApi() {
       throw error;
     }
   }
-  for (let i = 0; i < Math.min(10, movieIdList.length); i++) {
+  for (let i = 0; i < movieIdList.length; i++) {
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${movieIdList[i]}`,
@@ -36,17 +37,54 @@ async function fetchMoviesFromApi() {
           },
         }
       );
-      console.log([
+      moviesData.push([
         response.data.title,
         response.data.release_date,
         response.data.overview,
+        response.data.poster_path,
         response.data.genres,
+        response.data.popularity,
       ]);
     } catch (error) {
       console.error('Error fetching data from API:', error);
       throw error;
     }
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieIdList[i]}/videos`,
+        {
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        }
+      );
+      let link_suffix = '';
+      //moviesData[i].push([response.data.results]);
+      if (response.data.results.length == 0) {
+        //link_suffix = 'No videos related to movie found';
+        console.log('trailer not found');
+        console.log(response.data.results);
+        console.log(i);
+        moviesData.pop();
+      } else {
+        link_suffix = response.data.results[0]['key'];
+        for (let j = 0; j < response.data.results.length; j++) {
+          if (
+            response.data.results[j]['name'].toLowerCase().includes('trailer')
+          ) {
+            link_suffix = response.data.results[j]['key'];
+            break;
+          }
+        }
+        moviesData[moviesData.length - 1].push(link_suffix);
+      }
+    } catch (error) {
+      console.error('Error fetching data from API:', error);
+      throw error;
+    }
   }
+  console.log(moviesData[0]);
+  console.log(moviesData.length);
 }
 
 //async function seedDatabase() {
