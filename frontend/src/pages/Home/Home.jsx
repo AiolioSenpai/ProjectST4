@@ -7,8 +7,6 @@ import './Home.css';
 function Home() {
   const [movieName, setMovieName] = useState("");
   const { movies} = useFetchMovies();
-  // console.log('Movies:', movies);
-  // console.log(Object.values(movies).filter((el = Object.values(movies)) => el.title.includes("G")))
 
   return (
     <div className="App">

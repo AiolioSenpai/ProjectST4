@@ -1,0 +1,98 @@
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #0f2c43;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ab0000;
+    align-items: center;
+}
+
+.movie-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-poster {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.movie-overview {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: justify;
+    color: #ffffff;
+}
+
+.movie-release-date {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.movie-actors {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.movie-actors h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.movie-actors ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movie-actors li {
+    margin: 5px 10px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.movie-trailer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.movie-trailer h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.movie-trailer iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

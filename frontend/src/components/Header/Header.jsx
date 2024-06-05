@@ -8,12 +8,9 @@ const Header = () => {
         Home
       </Link>
       <div>|</div>
-      <Link className="Link" to="/counter">
-        Counter
-      </Link>
       <div>|</div>
       <Link className="Link" to="/users">
-        Users
+        Account
       </Link>
       <div>|</div>
       <Link className="Link" to="/about">
