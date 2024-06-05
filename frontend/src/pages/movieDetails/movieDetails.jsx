@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useFetchMovies } from '../Home/useFetchmovies.js';
 import './movieDetails.css'
 
@@ -19,7 +21,12 @@ function MovieDetails() {
 
   return (
     <div className="movie-details">
-            <h1 className="movie-title">{movie.title}</h1>
+            <div className="movie-header">
+                <h1 className="movie-title">{movie.title}</h1>
+                <span className="movie-vote">
+                    <FontAwesomeIcon icon={faStar} className="star-icon" /> {movie.vote_average}
+                </span>
+            </div>
             <div className="movie-content">
                 <div className='movie-media'>
                 <img className="movie-poster" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
