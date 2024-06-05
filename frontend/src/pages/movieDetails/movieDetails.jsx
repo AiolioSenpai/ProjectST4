@@ -21,7 +21,7 @@ function MovieDetails() {
     <div className="movie-details">
             <h1 className="movie-title">{movie.title}</h1>
             <div className="movie-content">
-                <img className="movie-postehqr" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                <img className="movie-poster" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
                 <div className="movie-info">
                     <p className="movie-overview">{movie.overview}</p>
                     <p className="movie-release-date">Date de sortie : {movie.release_date}</p>
@@ -32,19 +32,19 @@ function MovieDetails() {
                                 <li key={index}>{actor.name}</li>
                             ))}
                         </ul>
-                    </div>
+                    </div> */}
                     <div className="movie-trailer">
                         <h3>Trailer :</h3>
                         <iframe
                             width="560"
                             height="315"
-                            src={`https://www.youtube.com/embed/${movie.trailer_key}`}
+                            src={`https://www.youtube.com/embed/PLl99DlL6b4`} //${movie.trailer_key}
                             title="YouTube video player"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                         ></iframe>
-                    </div> */}
+                    </div> 
                 </div>
             </div>
         </div>
