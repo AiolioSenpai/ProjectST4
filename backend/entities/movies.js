@@ -1,4 +1,4 @@
-import typeorm, { Any } from 'typeorm';
+import typeorm from 'typeorm';
 
 const Movie = new typeorm.EntitySchema({
   name: 'Movie',
@@ -6,11 +6,15 @@ const Movie = new typeorm.EntitySchema({
     id_movie: {
       primary: true,
       type: Number,
+      generated: true,
     },
     title: {
       type: String,
     },
     release_date: { 
+      type: String
+     },
+     description:{
       type: String
      },
     trailer: { 
