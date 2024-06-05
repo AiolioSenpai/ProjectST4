@@ -1,7 +1,7 @@
 import typeorm, { Any } from 'typeorm';
 
-const MovieDB = new typeorm.EntitySchema({
-  name: 'MovieDB',
+const Movie = new typeorm.EntitySchema({
+  name: 'Movie',
   columns: {
     id_movie: {
       primary: true,
@@ -50,4 +50,4 @@ const MovieDB = new typeorm.EntitySchema({
 }
 );
 
-export default MovieDB;
+export default Movie;
