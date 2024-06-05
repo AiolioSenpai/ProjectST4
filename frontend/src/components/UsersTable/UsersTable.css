@@ -1,0 +1,11 @@
+.users-table,
+.users-table td,
+.users-table th {
+  border-collapse: collapse;
+  border: 1px solid grey;
+}
+
+.users-table td,
+.users-table th {
+  padding: 10px;
+}
