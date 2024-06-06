@@ -13,10 +13,11 @@ function MovieDetails() {
   console.log(id)
   const [movie, setMovie] = useState(null);
   const [genre, setGenre] = useState(null);
+  const [rate, setRate] = useState(null);
   const [cast, setCast] = useState(null);
   const { movies } = useFetchMovies();
-    const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
-    const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
+  const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
+  const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
 
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function MovieDetails() {
         .catch((error) => {
           console.log(error)
         });
+
 
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/movies/genre/?id_movie=${id}`)
@@ -49,14 +51,28 @@ function MovieDetails() {
         .catch((error) => {
         console.log(error)
         });
-
+    axios
+    .get(`${import.meta.env.VITE_BACKEND_URL}/users/rating/movie?id_movie=${id}&id_user=1`)
+    .then((response) => {
+        console.log(response.data)
+        setRate(response.data.rate);
+            })
+        .catch((error) => {
+        console.log(error)
+        });
+    console.log(rate)
+    if (parseInt(rate)===1){
+        setThumbsUpClicked(true)
+    }else if (parseInt(rate)===-1){
+        setThumbsDownClicked(true)
+    }
 
     
     
     // const foundMovie = movies.find(m => m.id === parseInt(id));
     // setMovie(foundMovie);
     console.log(movie)
-  }, [id,movies]);
+  }, [id,movies,rate]);
 //   }, [id, movies]);
 
   if (!movie||!cast||!genre) {
@@ -66,20 +82,38 @@ function MovieDetails() {
   console.log(thumbsDownClicked )
 
   const handleThumbsUp = (movie) => {
-    axios
+    if(!thumbsUpClicked){
+        axios
     .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         id_user:1,
         id_movie:movie.id_movie,
         rate:1
     }).then(() => {
         setThumbsUpClicked(true);
+        setThumbsDownClicked(false);
       })
     
-    console.log('Thumbs up clicked');
+    console.log('Thumbs up clicked');}
+    else
+    {
+        console.log(movie.id_movie)
+        axios
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
+        data:{
+            id_user:1,
+            id_movie:movie.id_movie,}
+    }).then(() => {
+        setThumbsUpClicked(false);
+        setThumbsDownClicked(false);
+      })
+    }
 
   };
 
   const handleThumbsDown = () => {
+    if(!thumbsDownClicked){
+
+    
     axios
     .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         id_user:1,
@@ -87,14 +121,32 @@ function MovieDetails() {
         rate:-1
     }).then(() => {
         setThumbsDownClicked(true);
+        setThumbsUpClicked(false);
       })
-    console.log('Thumbs down clicked');
+    console.log('Thumbs down clicked');}
+    else{
+        axios
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
+        data:{
+        id_user:1,
+        id_movie:movie.id_movie,}
+        
+    }).then(() => {
+        setThumbsUpClicked(false);
+        setThumbsDownClicked(false);
+      })
+    }
+
+    
   };
+    // Format the release date
+    const releaseDate = new Date(movie.release_date);
+    const formattedReleaseDate = releaseDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
     <div className="movie-details">
             <div className="movie-header">
-                <h1 className="movie-title">{movie.title}</h1>
+                <h1 className="movie-titledets">{movie.title}</h1>
                 <span className="movie-vote">
                     <FontAwesomeIcon icon={faStar} className="star-icon" /> {movie.rating_tmdb}
                 </span>
@@ -104,7 +156,6 @@ function MovieDetails() {
                     
                 <img className="movie-poster" src={`https://image.tmdb.org/t/p/w300${movie.image}`} alt={movie.title} />
                 <div className="movie-trailer">
-                        <h3>Trailer :</h3>
                         <iframe
                             width="1024"
                             height="720"
@@ -116,9 +167,8 @@ function MovieDetails() {
                         ></iframe>
                     </div>
                 </div>
-                <div className='movie-rate'>
-
-                <RatingButtons
+                <div className='movie-rate' style={{ gap: '10px' }}>
+                <RatingButtons className="rating-button"
                     onThumbsUp={  ()=>  handleThumbsUp(movie)}
                     onThumbsDown={()=>handleThumbsDown(movie)}
                     thumbsUpClicked={thumbsUpClicked}
@@ -126,10 +176,10 @@ function MovieDetails() {
                 />
                 </div>
                 <div className="movie-info">
+                    <p className="movie-release-date">Release Date: {formattedReleaseDate}</p>
                     <p className="movie-overview">{movie.description}</p>
-                    <p className="movie-release-date">Date de sortie : {movie.release_date}</p>
                     <div className="movie-actors">
-                        <h3>Acteurs :</h3>
+                        <h3>Actors :</h3>
                      </div>
                     <ActorsImageList images={cast}/>
                     <div className="movie-genres">
