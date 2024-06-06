@@ -8,190 +8,20 @@ const API_KEY =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo';
 
 async function fetchMoviesFromApi() {
-  const movieIdList = [];
-  for (let i = 1; i <= 10; i++) {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/top_rated?page=${i}`,
-        {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
-      );
-      for (let j = 0; j < response.data.results.length; j++) {
-        movieIdList.push(response.data.results[j]['id']);
-      }
-      //return response.data.results;
-    } catch (error) {
-      console.error('Error fetching data from API:', error);
-      throw error;
-    }
+  try {
+    const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching data from API:', error);
+    throw error;
   }
-  for (let i = 0; i < Math.min(10, movieIdList.length); i++) {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieIdList[i]}`,
-        {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
-      );
-      moviesData.push({
-        id_movie: response.data.id,
-        title: response.data.title,
-        release_date: response.data.release_date,
-        description: response.data.overview,
-        image: response.data.poster_path,
-        genres: response.data.genres,
-        rating_tmdb: response.data.popularity,
-      });
-    } catch (error) {
-      console.error('Error fetching data from API:', error);
-      throw error;
-    }
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieIdList[i]}/videos`,
-        {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
-      );
-      let link_suffix = '';
-      if (response.data.results.length == 0) {
-        moviesData.pop();
-        continue;
-      } else {
-        link_suffix = response.data.results[0]['key'];
-        for (let j = 0; j < response.data.results.length; j++) {
-          if (
-            response.data.results[j]['name'].toLowerCase().includes('trailer')
-          ) {
-            link_suffix = response.data.results[j]['key'];
-            break;
-          }
-        }
-        moviesData[moviesData.length - 1].trailer = link_suffix;
-      }
-    } catch (error) {
-      console.error('Error fetching data from API:', error);
-      throw error;
-    }
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieIdList[i]}/credits`,
-        {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
-      );
-      const cast = response.data.cast.slice(
-        0,
-        Math.min(5, response.data.cast.length)
-      );
-      if (cast.length == 0) {
-        moviesData.pop();
-        continue;
-      }
-      moviesData[moviesData.length - 1].cast = [];
-      for (let j = 0; j < cast.length; j++) {
-        moviesData[moviesData.length - 1].cast.push({
-          id_actor: cast[j].id,
-          actor_name: cast[j].name,
-          image: cast[j].profile_path,
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching data from API:', error);
-      throw error;
-    }
-  }
-  const uniqueArr = [];
-
-  for (let i = 0; i < moviesData.length; i++) {
-    let found = 0;
-    for (let j = 0; j < uniqueArr.length; j++) {
-      if (uniqueArr[j].id_movie == moviesData[i].id_movie) {
-        found = 1;
-      }
-    }
-    if (found == 0) {
-      uniqueArr.push(moviesData[i]);
-    }
-  }
-
-  return uniqueArr;
 }
 
-function extractGenresFromMovies(moviesData) {
-  const genres = [];
-  const id_to_genre = new Map();
-  for (let i = 0; i < moviesData.length; i++) {
-    for (let j = 0; j < moviesData[i].genres.length; j++) {
-      //genres.push();
-      id_to_genre.set(moviesData[i].genres[j].id, moviesData[i].genres[j].name);
-    }
-  }
-  for (const [key, value] of id_to_genre) {
-    genres.push({ id_genre: key, genre_type: value });
-  }
-
-  return genres;
-}
-
-function extractMovieGenre(moviesData) {
-  const movieGenres = [];
-  for (let i = 0; i < moviesData.length; i++) {
-    for (let j = 0; j < moviesData[i].genres.length; j++) {
-      movieGenres.push({
-        id_movie: moviesData[i].id_movie,
-        id_genre: moviesData[i].genres[j].id,
-      });
-    }
-  }
-
-  return movieGenres;
-}
-function extractMovieCast(moviesData) {
-  const movieActors = [];
-  for (let i = 0; i < moviesData.length; i++) {
-    for (let j = 0; j < moviesData[i].cast.length; j++) {
-      movieActors.push({
-        id_movie: moviesData[i].id_movie,
-        id_actor: moviesData[i].cast[j].id_actor,
-      });
-    }
-  }
-
-  return movieActors;
-}
-
-function extractActorsFromMovies(movies) {
-  const actors = [];
-  const id_to_actor = new Map();
-  for (let i = 0; i < movies.length; i++) {
-    for (let j = 0; j < movies[i].cast.length; j++) {
-      //genres.push();
-      id_to_actor.set(movies[i].cast[j].id_actor, [
-        movies[i].cast[j].actor_name,
-        movies[i].cast[j].image,
-      ]);
-    }
-  }
-  for (const [key, value] of id_to_actor) {
-    if (value[1] != undefined) {
-      actors.push({ id_actor: key, actor_name: value[0], image: value[1] });
-    }
-  }
-
-  return actors;
-}
-
-async function seedMoviesDB(movies) {
+async function seedDatabase() {
   try {
     // Initialize the data source
     await appDataSource.initialize();

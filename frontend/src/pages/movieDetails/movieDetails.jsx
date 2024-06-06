@@ -113,11 +113,12 @@ function MovieDetails() {
                             {genre.map((genreOfMovie) => (
                                 <span key={genreOfMovie.id_genre} className="genre-tag">{genreOfMovie.genre_type}</span>
                             ))}
+                            </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
-        </div>
+        
   );
 }
 

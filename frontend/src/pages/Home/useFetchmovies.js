@@ -6,7 +6,8 @@ export function useFetchMovies() {
   const [movies, setMovies] = useState([]);
 
 
-  const fetchmovies = () => {
+  const fetchMovies = () => {
+
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/  `)
       .then((response) => {
@@ -32,7 +33,7 @@ export function useFetchMovies() {
 
   // fetch movies on component mount
   useEffect(() => {
-    fetchmovies();
+    fetchMovies();
   }, []);
 
   return { movies };
