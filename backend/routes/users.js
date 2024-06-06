@@ -9,7 +9,6 @@ const userRepository = appDataSource.getRepository(User);
 const movieRepository = appDataSource.getRepository(Movie);
 const ratingRepository = appDataSource.getRepository(Rating);
 
-
 router.get('/', function (req, res) {
   appDataSource
     .getRepository(User)
@@ -17,6 +16,32 @@ router.get('/', function (req, res) {
     .then(function (users) {
       res.json({ users: users });
     });
+});
+
+router.get('/home/:id_user', async (req, res) => {
+  const userId = parseInt(req.params.id_user, 10);
+
+  if (isNaN(userId)) {
+    return res.status(400).json({ message: 'Invalid user ID' });
+  }
+
+  try {
+    const user = await userRepository.findOne({
+      where: { id_user: userId },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: `Welcome home, ${user.firstname}`, user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+      details: err.message,
+    });
+  }
 });
 
 router.get('/ratings', async (req, res) => {
@@ -30,7 +55,7 @@ router.get('/ratings', async (req, res) => {
   try {
     const user = await userRepository.findOne({
       where: { id_user: userId },
-      relations: ['movies_rates', 'movies_rates.Movie_rate']
+      relations: ['movies_rates', 'movies_rates.Movie_rate'],
     });
 
     if (!user) {
@@ -56,7 +81,9 @@ router.post('/ratings', async (req, res) => {
 
   try {
     const user = await userRepository.findOne({ where: { id_user: id_user } });
-    const movie = await movieRepository.findOne({ where: { id_movie: id_movie } });
+    const movie = await movieRepository.findOne({
+      where: { id_movie: id_movie },
+    });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -87,7 +114,7 @@ router.post('/ratings', async (req, res) => {
 });
 
 router.post('/new', function (req, res) {
-  const userRepository = appDataSource.getRepository(User);
+  //const userRepository = appDataSource.getRepository(User);
   const newUser = userRepository.create({
     email: req.body.email,
     firstname: req.body.firstname,

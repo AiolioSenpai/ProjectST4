@@ -18,11 +18,11 @@ const User = new typeorm.EntitySchema({
   },
   relations: {
     movies_rates: {
-        type: 'one-to-many',
-        target: 'rating',
-        inverseSide: 'user_rate',
-    }
-}
+      type: 'one-to-many',
+      target: 'rating',
+      inverseSide: 'user_rate',
+    },
+  },
 });
 
 export default User;

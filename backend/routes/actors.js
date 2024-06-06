@@ -7,70 +7,68 @@ const actorRepository = appDataSource.getRepository(Actor);
 
 router.get('/', async (req, res) => {
   try {
-    const allActors = await  actorRepository.find()
-    res.json(allActors)
-  
+    const allActors = await actorRepository.find();
+    res.json(allActors);
   } catch (err) {
     console.error(err);
     res.status(500).json({
-        message: 'Internal Server Error',
+      message: 'Internal Server Error',
     });
-}
+  }
 });
-
 
 router.post('/new', async (req, res) => {
   try {
-      console.log(req.body);
+    console.log(req.body);
 
-      const newActor = actorRepository.create({
-          id_actor:req.body.id_actor,
-          actor_name: req.body.actor_name,
-          image: req.body.image,
-      });
+    const newActor = actorRepository.create({
+      id_actor: req.body.id_actor,
+      actor_name: req.body.actor_name,
+      image: req.body.image,
+    });
 
-      await actorRepository.insert(newActor);
+    await actorRepository.insert(newActor);
 
-      
-      res.status(201).json({
-          message: 'HTTP 201 Created',
-          actor: newActor,
-      });
+    res.status(201).json({
+      message: 'HTTP 201 Created',
+      actor: newActor,
+    });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({
-          message: 'Internal Server Error',
-      });
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+    });
   }
 });
 
 router.get('/:actorId', async (req, res) => {
   try {
-    const idActor = await  actorRepository.find({
+    const idActor = await actorRepository.find({
       where: {
         id_actor: req.params.actorId,
       },
-  })
-  if (idActor.length != 0) {
-  res.status(200).json({
-    message: 'HTTP 200 OK',
-    actor: idActor,
-  })
-} else {
-  res.status(404).json({
-    message: 'HTTP 404 Not Found',
-  })
-}
-  } catch (err) {
-      console.error(err);
-      res.status(500).json({
-          message: 'Internal Server Error',
+    });
+    if (idActor.length != 0) {
+      res.status(200).json({
+        message: 'HTTP 200 OK',
+        actor: idActor,
       });
-}})
+    } else {
+      res.status(404).json({
+        message: 'HTTP 404 Not Found',
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
 
 router.delete('/:actorId', function (req, res) {
-  
-    actorRepository.delete({ id_actor: req.params.actorId })
+  actorRepository
+    .delete({ id_actor: req.params.actorId })
     .then(function () {
       res.status(200).json({ message: 'HTTP 200 OK' });
     })

@@ -5,12 +5,13 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import moviesRouter from './routes/movies.js';
 import actorsRouter from './routes/actors.js';
+import authRouter from './routes/authRoutes.js';
 import { routeNotFoundJsonHandler } from './services/routeNotFoundJsonHandler.js';
 import { jsonErrorHandler } from './services/jsonErrorHandler.js';
 import { appDataSource } from './datasource.js';
 
 appDataSource
-  .initialize()   
+  .initialize()
   .then(() => {
     console.log('Data Source has been initialized!');
     const app = express();
@@ -25,7 +26,7 @@ appDataSource
     app.use('/users', usersRouter);
     app.use('/movies', moviesRouter);
     app.use('/actors', actorsRouter);
-
+    app.use('/auth', authRouter);
 
     // Register 404 middleware and error handler
     app.use(routeNotFoundJsonHandler); // this middleware must be registered after all routes to handle 404 correctly
@@ -39,4 +40,4 @@ appDataSource
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);
- });
+  });

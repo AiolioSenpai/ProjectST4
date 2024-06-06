@@ -69,7 +69,10 @@ function score(user_object, movie_object) {
 }
 
 async function getRecommendationForUser(user_id) {
-  await appDataSource.initialize();
+  console.log(user_id);
+  if (!appDataSource.isInitialized) {
+    await appDataSource.initialize();
+  }
   const userRepository = appDataSource.getRepository(User);
   const user = await userRepository.findOne({
     where: { id_user: user_id },
@@ -78,7 +81,7 @@ async function getRecommendationForUser(user_id) {
   const allActors = await appDataSource.getRepository(Actor).find();
   const allGenres = await appDataSource.getRepository(Genre).find();
   const allMovies = await appDataSource.getRepository(Movie).find();
-  let movie_ids = [];
+  const movie_ids = [];
   const all_desc_plus_title_plus_releasedate = [];
   for (const movie of allMovies) {
     movie_ids.push(movie.id_movie);
@@ -125,7 +128,7 @@ async function getRecommendationForUser(user_id) {
       collection
     );
   }
-  movie_ids = movie_ids.sort(function (a, b) {
+  movie_ids.sort(function (a, b) {
     const A = score(user_object, movieVectorsArray[a]);
     const B = score(user_object, movieVectorsArray[b]);
     if (A < B) {
@@ -147,3 +150,6 @@ async function getRecommendationForUser(user_id) {
 
   return movie_ids;
 }
+export default getRecommendationForUser;
+
+//console.log(await getRecommendationForUser(1));
