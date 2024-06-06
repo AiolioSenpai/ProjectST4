@@ -85,6 +85,13 @@
     width: 100%;
     max-width: 800px;
 }
+.movie-rate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
 
 .movie-overview {
     font-size: 1.2em;

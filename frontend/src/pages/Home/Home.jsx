@@ -14,6 +14,7 @@ function Home() {
   const { movies } = useFetchMovies();
   const navigate = useNavigate();
 
+  // console.log(moviess.data)
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
