@@ -62,7 +62,7 @@ async function fetchMoviesFromApi() {
         }
       );
       let link_suffix = '';
-      if (response.data.results.length == 0) {
+      if (response.data.results.length === 0) {
         moviesData.pop();
         continue;
       } else {
@@ -90,11 +90,14 @@ async function fetchMoviesFromApi() {
           },
         }
       );
-      const cast = response.data.cast.slice(
-        0,
-        Math.min(5, response.data.cast.length)
-      );
-      if (cast.length == 0) {
+      const newResponse = [];
+      for (let j = 0; j < response.data.cast.length; j++) {
+        if (response.data.cast[j].profile_path !== null) {
+          newResponse.push(response.data.cast[j]);
+        }
+      }
+      const cast = newResponse.slice(0, Math.min(5, newResponse.length));
+      if (cast.length === 0) {
         moviesData.pop();
         continue;
       }
@@ -116,11 +119,11 @@ async function fetchMoviesFromApi() {
   for (let i = 0; i < moviesData.length; i++) {
     let found = 0;
     for (let j = 0; j < uniqueArr.length; j++) {
-      if (uniqueArr[j].id_movie == moviesData[i].id_movie) {
+      if (uniqueArr[j].id_movie === moviesData[i].id_movie) {
         found = 1;
       }
     }
-    if (found == 0) {
+    if (found === 0) {
       uniqueArr.push(moviesData[i]);
     }
   }
@@ -184,7 +187,7 @@ function extractActorsFromMovies(movies) {
     }
   }
   for (const [key, value] of id_to_actor) {
-    if (value[1] != undefined) {
+    if (value[1] !== undefined) {
       actors.push({ id_actor: key, actor_name: value[0], image: value[1] });
     }
   }
@@ -329,7 +332,7 @@ async function seedActorsDB(movies) {
     const actorRepository = appDataSource.getRepository(Actor);
     const newActors = actorRepository.create(actors);
     await actorRepository.insert(newActors);
-    console.log('Movies have been successfully seeded.');
+    console.log('Actors have been successfully seeded.');
   } catch (err) {
     console.error('Error seeding the database:', err);
   } finally {

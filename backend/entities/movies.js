@@ -54,7 +54,7 @@ const Movie = new typeorm.EntitySchema({
     movies_rates: {
       type: 'one-to-many',
       target: 'rating',
-      inverseSide: 'Movie',
+      inverseSide: 'Movie_rate',
     },
   },
 });
