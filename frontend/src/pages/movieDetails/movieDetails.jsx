@@ -13,6 +13,7 @@ function MovieDetails() {
   console.log(id)
   const [movie, setMovie] = useState(null);
   const [genre, setGenre] = useState(null);
+  const [rate, setRate] = useState(null);
   const [cast, setCast] = useState(null);
   const { movies } = useFetchMovies();
     const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
@@ -29,6 +30,7 @@ function MovieDetails() {
         .catch((error) => {
           console.log(error)
         });
+
 
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/movies/genre/?id_movie=${id}`)
@@ -49,14 +51,28 @@ function MovieDetails() {
         .catch((error) => {
         console.log(error)
         });
-
+    axios
+    .get(`${import.meta.env.VITE_BACKEND_URL}/users/rating/movie?id_movie=${id}&id_user=1`)
+    .then((response) => {
+        console.log(response.data)
+        setRate(response.data.rate);
+            })
+        .catch((error) => {
+        console.log(error)
+        });
+    console.log(rate)
+    if (parseInt(rate)===1){
+        setThumbsDownClicked(true)
+    }else if (parseInt(rate)===-1){
+        setThumbsDownClicked(true)
+    }
 
     
     
     // const foundMovie = movies.find(m => m.id === parseInt(id));
     // setMovie(foundMovie);
     console.log(movie)
-  }, [id,movies]);
+  }, [id,movies,rate]);
 //   }, [id, movies]);
 
   if (!movie||!cast||!genre) {
@@ -66,20 +82,38 @@ function MovieDetails() {
   console.log(thumbsDownClicked )
 
   const handleThumbsUp = (movie) => {
-    axios
+    if(!thumbsUpClicked){
+        axios
     .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         id_user:1,
         id_movie:movie.id_movie,
         rate:1
     }).then(() => {
         setThumbsUpClicked(true);
+        setThumbsDownClicked(false);
       })
     
-    console.log('Thumbs up clicked');
+    console.log('Thumbs up clicked');}
+    else
+    {
+        console.log(movie.id_movie)
+        axios
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/rating`, {
+        data:{
+            id_user:1,
+            id_movie:movie.id_movie,}
+    }).then(() => {
+        setThumbsUpClicked(false);
+        setThumbsDownClicked(false);
+      })
+    }
 
   };
 
   const handleThumbsDown = () => {
+    if(!thumbsDownClicked){
+
+    
     axios
     .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         id_user:1,
@@ -87,8 +121,23 @@ function MovieDetails() {
         rate:-1
     }).then(() => {
         setThumbsDownClicked(true);
+        setThumbsUpClicked(false);
       })
-    console.log('Thumbs down clicked');
+    console.log('Thumbs down clicked');}
+    else{
+        axios
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/rating`, {
+        data:{
+        id_user:1,
+        id_movie:movie.id_movie,}
+        
+    }).then(() => {
+        setThumbsUpClicked(false);
+        setThumbsDownClicked(false);
+      })
+    }
+
+    
   };
 
   return (
