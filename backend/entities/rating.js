@@ -21,13 +21,13 @@ const rating = new typeorm.EntitySchema({
         type: 'many-to-one',
         target: 'Movie',
         joinColumn: { name: 'id_movie' },
-        inverseSide: 'rating',
+        inverseSide: 'movies_rates',
     },
     user_rate: {
         type: 'many-to-one',
         target: 'User',
         joinColumn: { name: 'id_user' },
-        inverseSide: 'rating',
+        inverseSide: 'movies_rates',
     },
     
   }

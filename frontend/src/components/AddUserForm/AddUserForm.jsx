@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './AddUserForm.css';
+import * as React from 'react';
+import Button from '@mui/material/Button';
 
 const DEFAULT_FORM_VALUES = {
   email: '',
@@ -69,9 +71,9 @@ function AddUserForm({ onSuccessfulUserCreation }) {
             setFormValues({ ...formValues, lastname: event.target.value })
           }
         />
-        <button className="add-user-button" type="submit">
+        <Button variant="contained" type="submit">
           Add user
-        </button>
+        </Button>
       </form>
       {userCreationSuccess !== null && (
         <div className="user-creation-success">{userCreationSuccess}</div>
