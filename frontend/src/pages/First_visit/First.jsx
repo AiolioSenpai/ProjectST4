@@ -18,6 +18,7 @@ function First() {
   const { movies } = useFetchMovies();
   const { genresSuggestions } = useFetchGenres();
   const [ratedMoviesCount, setRatedMoviesCount] = useState(0);
+  const [selectedMovies, setSelectedMovies] = useState({});
   const user = { id_user: 1 };
   const [tags, setTags] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -32,8 +33,15 @@ function First() {
   
   const delimiters = [KeyCodes.comma, KeyCodes.enter];
   const navigate = useNavigate();
-
   useEffect(() => {
+    const initialSelectedMovies = {};
+    Object.values(movies).forEach((movie) => {
+        initialSelectedMovies[movie.id_movie] = false;
+    });
+    setSelectedMovies(initialSelectedMovies);
+}, [movies]);
+
+useEffect(() => {
     setFilteredSuggestions(genresSuggestions.filter(
       (genre) => !tags.find((tag) => tag.text === genre.text)
     ));
@@ -219,7 +227,9 @@ function First() {
             movie={movie} 
             user={user} 
             onRatingChange={handleRatingChange}
-            ratedMoviesCount={ratedMoviesCount}/>
+            ratedMoviesCount={ratedMoviesCount}
+            selectedMovies={selectedMovies}
+            setSelectedMovies={setSelectedMovies}/>
           ))}
         </ul>
       ) : (

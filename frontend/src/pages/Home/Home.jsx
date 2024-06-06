@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFetchMovies } from './useFetchMovies';
+import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
 import { Dropdown } from 'primereact/dropdown';

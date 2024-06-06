@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './favourite.css'
 
-function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
+function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount, selectedMovies, setSelectedMovies  }) {
 
     const [userRatings, setUserRatings] = useState([]);
-    const [isSelected, setIsSelected] = useState(false);
+
 
     // Base URL for movie images
     const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -28,17 +28,22 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
         setUserRatings(response.data);
         // Check if the current movie is in the user's ratings
         const isMovieRated = response.data.some(
-            (rating) => rating.id_movie === movie.id_movie
+            (rating) => rating.id_movie === movie.id_movie 
           );
-          setIsSelected(isMovieRated)
+          setSelectedMovies(prevState => ({
+            ...prevState,
+            [movie.id_movie]: isMovieRated,
+          }));
       })
       .catch((error) => {
         console.error(error);
       });
   }, [user.id_user]);
 
+  console.log(selectedMovies)
+
   const handleClick = () => {
-    if (ratedMoviesCount === 7 | ratedMoviesCount === 6) {
+    if (ratedMoviesCount === 7 || ratedMoviesCount === 6) {
         window.location.reload();
       }
     const isMovieRated = userRatings.some(
@@ -61,7 +66,10 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
         setUserRatings((prevRatings) =>
           prevRatings.filter((rating) => rating.id_movie !== movie.id_movie)
         );
-        setIsSelected(false);
+        setSelectedMovies(prevState => ({
+          ...prevState,
+          [movie.id_movie]: false,
+        }));;
         onRatingChange(false); // Decrement the count
       })
       .catch((error) => {
@@ -82,7 +90,10 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
             ...prevRatings,
             { id_movie: movie.id_movie, rate: 1 },
           ]);
-          setIsSelected(true);
+          setSelectedMovies(prevState => ({
+            ...prevState,
+            [movie.id_movie]: true,
+          }));;
           onRatingChange(true); // Increment the count
         })
         .catch((error) => {
@@ -99,7 +110,7 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
                 src={posterUrl}
                 alt={movie.title}
                 onClick={handleClick}
-                className={!isSelected ? 'gray-filter' : ''}
+                className={!selectedMovies[movie.id_movie]  ? 'gray-filter' : ''}
             />
     </div>
   );
