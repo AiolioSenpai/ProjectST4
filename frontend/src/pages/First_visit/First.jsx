@@ -14,8 +14,17 @@ function First() {
   const [searchQuery, setSearchQuery] = useState("");
   const { movies } = useFetchMovies();
   const [ratedMoviesCount, setRatedMoviesCount] = useState(0);
+  const [selectedMovies, setSelectedMovies] = useState({});
   const user = { id_user: 1 };
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const initialSelectedMovies = {};
+    Object.values(movies).forEach((movie) => {
+        initialSelectedMovies[movie.id_movie] = false;
+    });
+    setSelectedMovies(initialSelectedMovies);
+}, [movies]);
 
   useEffect(() => {
     // Fetch user's ratings when the component mounts
@@ -94,7 +103,9 @@ function First() {
             movie={movie} 
             user={user} 
             onRatingChange={handleRatingChange}
-            ratedMoviesCount={ratedMoviesCount}/>
+            ratedMoviesCount={ratedMoviesCount}
+            selectedMovies={selectedMovies}
+            setSelectedMovies={setSelectedMovies}/>
           ))}
         </ul>
       ) : (
