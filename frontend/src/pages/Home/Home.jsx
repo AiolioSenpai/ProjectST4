@@ -13,6 +13,8 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const { movies } = useFetchMovies();
   const navigate = useNavigate();
+  const [displayedMovies, setDisplayedMovies] = useState(36); 
+  const moviesToDisplay = Object.values(movies).slice(0, displayedMovies);
 
   // console.log(moviess.data)
   const handleSearchChange = (event) => {
@@ -44,6 +46,10 @@ function Home() {
       navigate(`/movieDetails/${selectedMovie.id_movie}`);
     }
   };
+  const handleLoadMore = () => {
+    // Increment the number of displayed movies by 6
+    setDisplayedMovies(prevDisplayedMovies => prevDisplayedMovies + 36);
+  };
 
   return (
     <div className="App">
@@ -66,14 +72,17 @@ function Home() {
           className="p-button-outlined"
         />
       </div>
-      {Object.values(movies).filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).length > 0 ? (
+      {moviesToDisplay.filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).length > 0 ? (
         <ul className='App-movies'>
-          {Object.values(movies).filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).map((movie, index) => (
+          {moviesToDisplay.filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).map((movie, index) => (
             <Movie key={index} movie={movie}/>
           ))}
         </ul>
       ) : (
         <p>Pas de résultats trouvés pour {searchQuery}</p>
+      )}
+      {displayedMovies < Object.values(movies).length && ( 
+        <Button label="Load More" onClick={handleLoadMore} className="p-button-outlined" />
       )}
     </div>
   );

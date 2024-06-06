@@ -95,14 +95,12 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
 
   return (
     <div>
-      <h2>{movie.title}</h2>
       <img
                 src={posterUrl}
                 alt={movie.title}
                 onClick={handleClick}
                 className={!isSelected ? 'gray-filter' : ''}
             />
-      <p>Date de sortie : {movie.release_date}</p>
     </div>
   );
 }

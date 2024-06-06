@@ -1,8 +1,14 @@
 import React from 'react';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import './movie_hover.css';
 
 function Movie({ movie }) {
-
+  const [hover, setHover] = useState(false);
+  // Parse the release_date string into a Date object
+  const releaseDate = new Date(movie.release_date);
+  // Format the release_date to display the day and the name of the month in English
+  const formattedReleaseDate = releaseDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric'});
   const navigate = useNavigate();
 
     // Base URL for movie images
@@ -18,12 +24,26 @@ function Movie({ movie }) {
     // Redirect to the movie details page
     navigate(`/movieDetails/${movie.id_movie}`);
   };
+  const handleMouseEnter = () => {
+    setHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHover(false);
+  };
 
   return (
-    <div>
-      <h2>{movie.title}</h2>
+    <div className="App-movie"
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}
+    >
       <img src={posterUrl} alt={movie.title} onClick={handleClick} />
-      <p>Date de sortie : {movie.release_date}</p>
+      {hover && (
+        <div className="movie-info-hover">
+          <p className="movie-title-hover">{movie.title}</p>
+          <p className="movie-release-date-hover">Released: {formattedReleaseDate}</p>
+        </div>
+      )}
     </div>
   );
 }
