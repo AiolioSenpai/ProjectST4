@@ -1,0 +1,35 @@
+/* DropdownStyles.css */
+.custom-dropdown .p-dropdown {
+    background-color: #f0f0f0 !important; /* Light grey background */
+    border: 1px solid #ccc !important; /* Border color */
+    border-radius: 5px !important; /* Rounded corners */
+    padding: 10px !important; /* Padding inside the dropdown */
+  }
+  
+  .custom-dropdown .p-dropdown .p-dropdown-label {
+    font-size: 16px !important; /* Font size for the selected value */
+    color: #333 !important; /* Text color */
+  }
+  
+  .custom-dropdown .p-dropdown .p-dropdown-trigger {
+    background-color: #007bff !important; /* Blue background for the trigger button */
+    border-radius: 0 5px 5px 0 !important; /* Rounded corners for the trigger button */
+    color: #fff !important; /* White text color */
+  }
+  
+  .custom-dropdown .p-dropdown-panel {
+    background-color: #fff !important; /* White background for the dropdown panel */
+    border: 1px solid #ccc !important; /* Border color */
+  }
+  
+  .custom-dropdown .p-dropdown-item {
+    padding: 10px !important; /* Padding for each dropdown item */
+    font-size: 14px !important; /* Font size for dropdown items */
+    color: #333 !important; /* Text color */
+  }
+  
+  .custom-dropdown .p-dropdown-item.p-highlight {
+    background-color: #007bff !important; /* Highlight color */
+    color: #fff !important; /* Text color for highlighted item */
+  }
+  

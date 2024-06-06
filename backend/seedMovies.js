@@ -8,26 +8,16 @@ const API_KEY =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo';
 
 async function fetchMoviesFromApi() {
-  const movieIdList = [];
-  const moviesData = [];
-  for (let i = 1; i <= 20; i++) {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/top_rated?page=${i}`,
-        {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
-      );
-      for (let j = 0; j < response.data.results.length; j++) {
-        movieIdList.push(response.data.results[j]['id']);
-      }
-      //return response.data.results;
-    } catch (error) {
-      console.error('Error fetching data from API:', error);
-      throw error;
-    }
+  try {
+    const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching data from API:', error);
+    throw error;
   }
   for (let i = 0; i < movieIdList.length; i++) {
     try {
