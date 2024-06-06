@@ -41,6 +41,107 @@
 
 .custom-dropdown .p-dropdown-label {
   width: 300px; 
+}/* Home.css */
+
+/* Other existing styles */
+
+.ReactTags__tag {
+  background: #e0e0e0; /* Grey background for tags */
+  border-radius: 15px; /* More rounded corners */
+  color: #333; /* Darker text color */
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px;
+  padding: 5px 10px;
+  transition: background 0.3s ease;
+}
+
+.ReactTags__tag:hover {
+  background: #ccc; /* Slightly darker grey on hover */
+}
+
+.ReactTags__tagInputField {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  padding: 5px;
+  flex: 1; /* Allow the input field to take the remaining space */
+}
+
+.ReactTags__remove {
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 8px;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.ReactTags__remove:hover {
+  color: #ff0000; /* Red color on hover for remove icon */
+}
+
+.custom-dropdown {
+  width: 300px;
+  margin: 10px 0;
+}
+
+.custom-tags {
+  display: flex; /* Display tags in a row */
+  flex-wrap: wrap; /* Allow tags to wrap to the next line if needed */
+  gap: 8px; /* Add some space between tags and input */
+  align-items: center;
+  flex: 1; /* Allow tags container to take the remaining space */
+}
+
+.tag-input-wrapper {
+  /* display: flex; */
+  /* align-items:center; Align items vertically */
+  gap: 8px; /* Add some space between tags and input */
+  position: relative; /* Relative positioning for suggestions dropdown */
+  width: 100%; /* Ensure the wrapper takes full width */
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 45%;
+  width: 10%; /* Make the dropdown take the full width of the parent */
+  background-color: white;
+  border: 1px solid #ccc;
+  /*z-index: 1000; */
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: black; /* Make suggestion text black */
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.App-movies {
+  list-style: none;
+  padding: 0;
+}
+
+.App-movies li {
+  margin: 10px 0;
 }
 
 @keyframes App-logo-spin {

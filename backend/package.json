@@ -20,6 +20,7 @@
     "morgan": "^1.10.0",
     "react-dev-utils": "^12.0.1",
     "react-scripts": "^3.0.1",
+    "react-tag-input": "^6.10.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.6",
     "typeorm": "^0.3.16"

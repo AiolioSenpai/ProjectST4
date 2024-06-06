@@ -20,6 +20,19 @@ router.get('/', async (req, res) => {
     });
 }
 });
+
+
+router.get('/movies-with-genres', async (req, res) => {
+  try {
+    // Fetch all movies with their genres
+    const movies = await movieRepository.find({ relations: ['movie_genre'] });
+
+    res.json(movies);
+  } catch (error) {
+    console.error('Error fetching movies with genres:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 router.get('/movie', async (req, res) => {
   try {
     console.log(req.query.id_movie)

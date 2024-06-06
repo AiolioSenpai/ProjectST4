@@ -10,7 +10,7 @@ export function useFetchMovies() {
   const fetchMovies = () => {
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/movies`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/movies/movies-with-genres`)
       .then((response) => {
         
         setMovies(response.data);
