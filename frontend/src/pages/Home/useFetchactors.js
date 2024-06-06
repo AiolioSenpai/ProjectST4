@@ -2,23 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 // import { API_KEY } from './config.js';
 
-export function useFetchMovies() {
-  const [movies, setMovies] = useState([]);
+export function useFetchCast({ movieId }) {
   const [cast, setCast] = useState([]);
 
-
-  const fetchMovies = () => {
-
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/movies`)
-      .then((response) => {
-        
-        setMovies(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
 
   const fetchCast = (movieId) => {
@@ -36,8 +22,8 @@ export function useFetchMovies() {
 
   // fetch movies on component mount
   useEffect(() => {
-    fetchMovies(), fetchCast;
+    fetchCast;
   }, []);
 
-  return { movies, cast };
+  return {cast };
 }

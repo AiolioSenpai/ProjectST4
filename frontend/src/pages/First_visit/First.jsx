@@ -1,22 +1,47 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFetchMovies } from './useFetchmovies';
-import Movie from '../../components/movie';
+import { useEffect, useState } from 'react';
+import { useFetchMovies } from '../Home/useFetchmovies';
+import Add_favourite from '../../components/add_favourite';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import 'primereact/resources/themes/saga-blue/theme.css'; // PrimeReact theme
 import 'primereact/resources/primereact.min.css'; // PrimeReact core CSS
 import 'primeicons/primeicons.css'; // PrimeIcons
-import './Home.css';
+import './first.css';
 
-function Home() {
+function First() {
   const [searchQuery, setSearchQuery] = useState("");
   const { movies } = useFetchMovies();
+  const [ratedMoviesCount, setRatedMoviesCount] = useState(0);
+  const user = { id_user: 1 };
   const navigate = useNavigate();
 
-  // console.log(moviess.data)
+  useEffect(() => {
+    // Fetch user's ratings when the component mounts
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
+        params: { id: user.id_user },
+      })
+      .then((response) => {
+        setRatedMoviesCount(response.data.length);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [user.id_user]);
+
+  const handleRedirect = () => {
+    navigate('/home');
+  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
+  };
+
+  const handleRatingChange = (isAdding) => {
+    // Update the count whenever a rating changes
+    setRatedMoviesCount(prevCount => isAdding ? prevCount + 1 : prevCount - 1);
   };
 
   const handleSearchSubmit = () => {
@@ -24,9 +49,6 @@ function Home() {
     const matchingMovies = Object.values(movies).filter(movie =>
       movie.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    if (matchingMovies.length > 0) {
-      navigate(`/movieDetails/${matchingMovies[0].id_movie}`);
-    }
   };
 
  // Filter dropdown options based on search query
@@ -40,15 +62,13 @@ function Home() {
   const handleDropdownChange = (e) => {
     setSearchQuery(e.value); // Update search query based on selected movie title
     const selectedMovie = Object.values(movies).find(movie => movie.title === e.value);
-    if (selectedMovie) {
-      navigate(`/movieDetails/${selectedMovie.id_movie}`);
-    }
   };
+
 
   return (
     <div className="App">
       <header className="App-header">
-        Welcome to MovieMuse
+        Parmi ces films proposés, choisissez 7 films que vous préférez:
       </header>
       <div>
         <Dropdown 
@@ -69,14 +89,26 @@ function Home() {
       {Object.values(movies).filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).length > 0 ? (
         <ul className='App-movies'>
           {Object.values(movies).filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase())).map((movie, index) => (
-            <Movie key={index} movie={movie}/>
+            <Add_favourite 
+            key={index} 
+            movie={movie} 
+            user={user} 
+            onRatingChange={handleRatingChange}
+            ratedMoviesCount={ratedMoviesCount}/>
           ))}
         </ul>
       ) : (
         <p>Pas de résultats trouvés pour {searchQuery}</p>
       )}
+      {ratedMoviesCount >= 7 && (
+      <Button 
+        label="Done" 
+        onClick={handleRedirect}
+        className="p-button-success top-right-button"
+      />
+    )}
     </div>
   );
 }
 
-export default Home;
+export default First;
