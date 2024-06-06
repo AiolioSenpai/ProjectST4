@@ -2,13 +2,13 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
-const RatingButtons = ({onThumbsUp, onThumbsDown }) => {
+const RatingButtons = ({onThumbsUp, onThumbsDown,thumbsUpClicked,thumbsDownClicked }) => {
   return (
     <div style={{display:'flex' ,top: '10px', right: '10px',alignItems:"start" }}>
         <button
           onClick={onThumbsUp}
           style={{
-            backgroundColor: 'green',
+            backgroundColor: thumbsDownClicked ? 'lightgreen' : 'green',
             borderRadius: '50%', // Make button fully round
             width: '40px', // Set width and height to create a circle
             height: '40px',
@@ -25,7 +25,7 @@ const RatingButtons = ({onThumbsUp, onThumbsDown }) => {
         <button
           onClick={onThumbsDown}
           style={{
-            backgroundColor: 'red',
+            backgroundColor: thumbsUpClicked ? 'lightcoral' : 'red',
             borderRadius: '50%', // Make button fully round
             width: '40px', // Set width and height to create a circle
             height: '40px',

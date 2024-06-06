@@ -9,25 +9,14 @@ export function useFetchMovies() {
   const fetchMovies = () => {
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/  `)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/movies`)
       .then((response) => {
-          setMovies(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-    // axios
-    // .get('https://api.themoviedb.org/3/movie/top_rated', {
-    //     headers: {
-    //       Authorization: `Bearer ${API_KEY}`,
-    //     },
-    //   })
-    // .then((response) => {
-    //   setMovies(response.data.results)
-    // })
-    // .catch((error) => {
-    //   console.log(error)
-    // });
+        
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
 

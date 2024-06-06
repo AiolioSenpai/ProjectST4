@@ -15,6 +15,9 @@ function MovieDetails() {
   const [genre, setGenre] = useState(null);
   const [cast, setCast] = useState(null);
   const { movies } = useFetchMovies();
+    const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
+    const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
+
 
   useEffect(() => {
      axios
@@ -59,12 +62,32 @@ function MovieDetails() {
   if (!movie||!cast||!genre) {
     return <div>Loading...</div>;
   }
+  console.log(thumbsUpClicked )
+  console.log(thumbsDownClicked )
 
-  const handleThumbsUp = () => {
+  const handleThumbsUp = (movie) => {
+    axios
+    .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
+        id_user:1,
+        id_movie:movie.id_movie,
+        rate:1
+    }).then(() => {
+        setThumbsUpClicked(true);
+      })
+    
     console.log('Thumbs up clicked');
+
   };
 
   const handleThumbsDown = () => {
+    axios
+    .post(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
+        id_user:1,
+        id_movie:movie.id_movie,
+        rate:-1
+    }).then(() => {
+        setThumbsDownClicked(true);
+      })
     console.log('Thumbs down clicked');
   };
 
@@ -96,8 +119,10 @@ function MovieDetails() {
                 <div className='movie-rate'>
 
                 <RatingButtons
-                    onThumbsUp={handleThumbsUp}
-                    onThumbsDown={handleThumbsDown}
+                    onThumbsUp={handleThumbsUp(movie)}
+                    onThumbsDown={handleThumbsDown(movie)}
+                    thumbsUpClicked={thumbsUpClicked}
+                    thumbsDownClicked={thumbsDownClicked}
                 />
                 </div>
                 <div className="movie-info">
