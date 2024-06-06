@@ -14,7 +14,7 @@ const User = new typeorm.EntitySchema({
     },
     firstname: { type: String },
     lastname: { type: String },
-    password: {type :String}
+    password: { type: String },
   },
   relations: {
     movies_rates: {
