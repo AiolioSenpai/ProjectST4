@@ -62,7 +62,7 @@ function MovieDetails() {
         });
     console.log(rate)
     if (parseInt(rate)===1){
-        setThumbsDownClicked(true)
+        setThumbsUpClicked(true)
     }else if (parseInt(rate)===-1){
         setThumbsDownClicked(true)
     }
