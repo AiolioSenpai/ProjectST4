@@ -8,17 +8,25 @@ export function useFetchMovies() {
 
   const fetchmovies = () => {
     axios
-    .get('https://api.themoviedb.org/3/movie/top_rated', {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
-      })
-    .then((response) => {
-      setMovies(response.data.results)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+      .get(`${import.meta.env.VITE_BACKEND_URL}/  `)
+      .then((response) => {
+          setMovies(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+    // axios
+    // .get('https://api.themoviedb.org/3/movie/top_rated', {
+    //     headers: {
+    //       Authorization: `Bearer ${API_KEY}`,
+    //     },
+    //   })
+    // .then((response) => {
+    //   setMovies(response.data.results)
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    // });
   };
 
 

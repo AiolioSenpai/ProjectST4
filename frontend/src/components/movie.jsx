@@ -12,11 +12,11 @@ function Movie({ movie }) {
     const IMAGE_SIZE = 'w200';
     
     // Construct the full URL for the movie poster image
-  const posterUrl = `${IMAGE_BASE_URL}${IMAGE_SIZE}${movie.poster_path}`;
+  const posterUrl = `${IMAGE_BASE_URL}${IMAGE_SIZE}${movie.image}`;
 
   const handleClick = () => {
     // Redirect to the movie details page
-    navigate(`/movieDetails/${movie.id}`);
+    navigate(`/movieDetails/${movie.id_movie}`);
   };
 
   return (
