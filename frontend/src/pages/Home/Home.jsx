@@ -4,6 +4,8 @@ import { useFetchMovies } from './useFetchMovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+
 
 import { WithContext as ReactTagInput } from 'react-tag-input';
 
@@ -195,6 +197,7 @@ function Home() {
           className="p-button-outlined"
         /> */}
       </div>
+      <div className='Movie-Grid'>
       {movies.filter(movie => 
       (
         movie.title.toLowerCase().includes(searchQuery.toLowerCase()))&&
@@ -215,6 +218,7 @@ function Home() {
       {displayedMovies < Object.values(movies).length && ( 
         <Button label="Load More" onClick={handleLoadMore} className="p-button-outlined" />
       )}
+    </div>
     </div>
   );
 }
