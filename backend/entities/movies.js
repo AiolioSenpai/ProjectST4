@@ -18,7 +18,8 @@ const Movie = new typeorm.EntitySchema({
      },
      image: { 
       type: String
-     },rating_tmdb:{
+     },
+     rating_tmdb:{
       type:String    }
      ,
   },

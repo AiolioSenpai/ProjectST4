@@ -10,10 +10,14 @@
     "lint": "eslint . --fix --ext jsx --ext js"
   },
   "dependencies": {
+    "@emotion/styled": "^11.1.5",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@mui/material": "^5.2.3",
     "axios": "^1.3.4",
     "prime-react": "^1.0.0",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
