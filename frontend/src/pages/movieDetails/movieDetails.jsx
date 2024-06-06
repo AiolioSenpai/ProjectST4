@@ -98,7 +98,7 @@ function MovieDetails() {
     {
         console.log(movie.id_movie)
         axios
-    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/rating`, {
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         data:{
             id_user:1,
             id_movie:movie.id_movie,}
@@ -126,7 +126,7 @@ function MovieDetails() {
     console.log('Thumbs down clicked');}
     else{
         axios
-    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/rating`, {
+    .delete(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
         data:{
         id_user:1,
         id_movie:movie.id_movie,}
