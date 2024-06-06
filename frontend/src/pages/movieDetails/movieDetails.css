@@ -8,144 +8,141 @@
     background-color: #0f2c43;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.movie-header {
+  }
+  
+  .movie-header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Align items to the start and end */
     margin-bottom: 20px;
-}
-
-.movie-title {
+  }
+  
+  .movie-titledets {
     font-size: 2.5em;
     margin-bottom: 20px;
     text-align: center;
     color: #a70000;
-}
-
-.movie-vote {
+  }
+  
+  .movie-vote {
     font-size: 1.5em;
     color: #ffffff;
     display: flex;
     margin-top: 10px;
     margin-left: 5px;
     align-items: center;
-}
-
-.star-icon {
+  }
+  
+  .star-icon {
     color: #FFD700; /* Gold color */
     align-items: center;
     margin-left: 10px;
     margin-right: 5px;
-}
-
-.movie-content {
+  }
+  
+  .movie-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.movie-media{
+    width: 100%;
+  }
+  
+  .movie-media {
     display: flex;
     justify-content: space-between;
-}
-
-.movie-poster {
+  }
+  
+  .movie-poster {
     width: 100%;
     max-width: 300px;
     max-height: 450px;
     border-radius: 10px;
-    margin-top: 66px;
     margin-right: 25px;
-}
-
-.movie-trailer {
+  }
+  
+  .movie-trailer {
     text-align: center;
-}
-
-.movie-trailer h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-.movie-trailer iframe {
+  }
+  
+  .movie-trailer iframe {
     width: 100%;
     width: 720px;
     height: 450px;
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.movie-info {
+  }
+  
+  .movie-rate {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-left: 610px;
+    width: 100%;
+  }
+  
+  .movie-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 800px;
-}
-.movie-rate {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-}
-
-.movie-overview {
+  }
+  
+  .movie-release-date {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  .movie-overview {
     font-size: 1.2em;
     margin-bottom: 20px;
     text-align: justify;
     color: #ffffff;
-}
-
-.movie-release-date {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    color: #ffffff;
-}
-
-.movie-actors {
+  }
+  
+  .movie-actors {
     margin-bottom: 20px;
     text-align: center;
-}
-
-.movie-actors h3 {
+  }
+  
+  .movie-actors h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #ffffff;
-}
-
-.movie-actors ul {
+  }
+  
+  .movie-actors ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.movie-actors li {
+  }
+  
+  .movie-actors li {
     margin: 5px 10px;
     font-size: 1.1em;
     color: #ffffff;
-}
-
-.movie-genres {
+  }
+  
+  .movie-genres {
     margin-top: 20px;
     margin-left: 20px;
     width: 100%;
     text-align: left;
-}
-
-.genres-list {
+  }
+  
+  .genres-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
-}
-
-.genre-tag {
+  }
+  
+  .genre-tag {
     background-color: #ACC8E5;
     color: #112A46;
     padding: 5px 10px;
@@ -153,5 +150,5 @@
     border-radius: 5px;
     font-size: 0.9em;
     display: inline-block;
-    
-}
+  }
+  

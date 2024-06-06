@@ -2,9 +2,9 @@ import * as React from 'react';
 
 function ActorsImageList  ({images} ){
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', overflowX: 'auto', alignItems: 'center',  }}>
       {images.map((image) => (
-        <div key={image.id_actor} style={{ marginRight: '10px' }}>
+        <div key={image.id_actor} style={{ justifyContent: "center", textAlign: 'center',}}>
           <img
             src={`https://image.tmdb.org/t/p/w300/${image.image}`}
             alt={image.actor_name}

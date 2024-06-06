@@ -24,6 +24,8 @@ function Home() {
   const { movies } = useFetchMovies();
   const { genresSuggestions } = useFetchGenres();
   const navigate = useNavigate();
+  const [displayedMovies, setDisplayedMovies] = useState(36); 
+  const moviesToDisplay = Object.values(movies).slice(0, displayedMovies);
 
   console.log(movies)
   const [tags, setTags] = useState([]);
@@ -62,6 +64,10 @@ function Home() {
     if (selectedMovie) {
       navigate(`/movieDetails/${selectedMovie.id_movie}`);
     }
+  };
+  const handleLoadMore = () => {
+    // Increment the number of displayed movies by 6
+    setDisplayedMovies(prevDisplayedMovies => prevDisplayedMovies + 36);
   };
 
   const handleDelete = (index) => {
@@ -205,6 +211,9 @@ function Home() {
         </ul>
       ) : (
         <p>Pas de résultats trouvés pour {searchQuery}</p>
+      )}
+      {displayedMovies < Object.values(movies).length && ( 
+        <Button label="Load More" onClick={handleLoadMore} className="p-button-outlined" />
       )}
     </div>
   );

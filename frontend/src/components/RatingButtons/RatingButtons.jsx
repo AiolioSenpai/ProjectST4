@@ -18,6 +18,7 @@ const RatingButtons = ({onThumbsUp, onThumbsDown,thumbsUpClicked,thumbsDownClick
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginLeft: '5px',
           }}
         >
           <FontAwesomeIcon icon={faThumbsUp} style={{ color: 'white' }} />
@@ -35,6 +36,7 @@ const RatingButtons = ({onThumbsUp, onThumbsDown,thumbsUpClicked,thumbsDownClick
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginLeft: '5px',
           }}
         >
           <FontAwesomeIcon icon={faThumbsDown} style={{ color: 'white' }} />
