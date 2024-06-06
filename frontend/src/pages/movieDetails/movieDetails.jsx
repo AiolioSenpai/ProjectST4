@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useFetchMovies } from '../Home/useFetchmovies.js';
+import { useFetchCast } from '../Home/useFetchactors.js';
 import './movieDetails.css'
 
 function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const { movies } = useFetchMovies();
+  const {cast} = useFetchCast(id)
 
   useEffect(() => {
     const foundMovie = movies.find(m => m.id_movie === parseInt(id));
@@ -46,15 +48,15 @@ function MovieDetails() {
                 <div className="movie-info">
                     <p className="movie-overview">{movie.description}</p>
                     <p className="movie-release-date">Date de sortie : {movie.release_date}</p>
-                    {/* <div className="movie-actors">
-                        <h3>Acteurs :</h3>
-                        <ul>
-                            {movie.actors.map((actor, index) => (
-                                <li key={index}>{actor.actor_name}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="movie-genres">
+                    <div className='movie-actors'>
+                        {cast.map(actor => (
+                        <div key={actor.id_actor}>
+                            <img src={actor.image} alt={actor.actor_name} />
+                            <li>{actor.actor_name}</li>
+                        </div>
+                         ))}
+                     </div>
+                    {/* <div className="movie-genres">
                         <div className="genres-list">
                         <h3 className='genres-word'>Genres :</h3>
                             <div className="genres-list">

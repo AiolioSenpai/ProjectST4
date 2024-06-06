@@ -24,7 +24,8 @@ router.get('/ratings', async (req, res) => {
   console.log('Requested User ID:', userId);
 
   if (isNaN(userId)) {
-    return res.status(400).json({ message: 'Invalid user ID' });
+    res.status(400).json({ message: 'Invalid user ID' });
+    return null
   }
 
   try {
@@ -85,6 +86,35 @@ router.post('/ratings', async (req, res) => {
     });
   }
 });
+
+router.delete('/ratings', async (req, res) => {
+  const { id_user, id_movie } = req.body;
+
+  if (!id_user || !id_movie) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    // Check if the rating exists
+    const rating = await ratingRepository.findOne({ where: { id_user: id_user, id_movie: id_movie } });
+    if (!rating) {
+      return res.status(404).json({ message: 'Rating not found' });
+    }
+
+    // Delete the rating
+    await ratingRepository.remove(rating);
+
+    res.status(200).json({ message: 'Rating deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+      details: err.message,
+    });
+  }
+});
+
+
 
 router.post('/new', function (req, res) {
   const userRepository = appDataSource.getRepository(User);

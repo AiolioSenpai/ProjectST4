@@ -107,7 +107,7 @@
 .movie-actors h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: #333;
+    color: #ffffff;
 }
 
 .movie-actors ul {
@@ -121,7 +121,7 @@
 .movie-actors li {
     margin: 5px 10px;
     font-size: 1.1em;
-    color: #555;
+    color: #ffffff;
 }
 
 .movie-genres {
