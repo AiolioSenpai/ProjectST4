@@ -119,8 +119,8 @@ function MovieDetails() {
                 <div className='movie-rate'>
 
                 <RatingButtons
-                    onThumbsUp={handleThumbsUp(movie)}
-                    onThumbsDown={handleThumbsDown(movie)}
+                    onThumbsUp={  ()=>  handleThumbsUp(movie)}
+                    onThumbsDown={()=>handleThumbsDown(movie)}
                     thumbsUpClicked={thumbsUpClicked}
                     thumbsDownClicked={thumbsDownClicked}
                 />
