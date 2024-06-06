@@ -6,25 +6,23 @@ export function useFetchMovies() {
   const [movies, setMovies] = useState([]);
 
 
-  const fetchmovies = () => {
+  const fetchMovies = () => {
+
     axios
-    .get('https://api.themoviedb.org/3/movie/top_rated', {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
+      .get(`${import.meta.env.VITE_BACKEND_URL}/movies`)
+      .then((response) => {
+        
+        setMovies(response.data);
       })
-    .then((response) => {
-      setMovies(response.data.results)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
 
   // fetch movies on component mount
   useEffect(() => {
-    fetchmovies();
+    fetchMovies();
   }, []);
 
   return { movies };
