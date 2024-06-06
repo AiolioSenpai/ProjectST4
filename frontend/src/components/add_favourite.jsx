@@ -22,7 +22,7 @@ function Add_favourite({ movie, user, onRatingChange, ratedMoviesCount }) {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`,
         {
-            params: { id: user.id_user },
+            params: { id_user: user.id_user },
           })
       .then((response) => {
         setUserRatings(response.data);

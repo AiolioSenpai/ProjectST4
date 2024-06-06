@@ -21,7 +21,7 @@ function First() {
     // Fetch user's ratings when the component mounts
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/users/ratings`, {
-        params: { id: user.id_user },
+        params: { id_user: user.id_user },
       })
       .then((response) => {
         setRatedMoviesCount(response.data.length);
