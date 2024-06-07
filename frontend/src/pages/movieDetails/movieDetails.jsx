@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'primereact/button';
 import RatingButtons from '../../components/RatingButtons/RatingButtons';
 import ActorsImageList from '../../components/ActorsImageList/ActorsImageList';
 import { useFetchMovies } from '../Home/useFetchmovies.js';
-import { Button } from 'primereact/button';
 import './movieDetails.css';
+import logo from '../Home/logo.svg';
 
 function MovieDetails() {
   console.log('hello');
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const userId = localStorage.getItem('user_id');
   //console.log(id);
@@ -78,7 +79,6 @@ function MovieDetails() {
       setThumbsDownClicked(true);
     }
 
-
     // const foundMovie = movies.find(m => m.id === parseInt(id));
     // setMovie(foundMovie);
     console.log(movie);
@@ -86,7 +86,11 @@ function MovieDetails() {
   //   }, [id, movies]);
 
   if (!movie || !cast || !genre) {
-    return <div>Loading...</div>;
+    return (
+      <div className="movie-details">
+        <h1>Loading ...</h1>
+      </div>
+    );
   }
   console.log(thumbsUpClicked);
   console.log(thumbsDownClicked);
@@ -217,9 +221,9 @@ function MovieDetails() {
           </div>
         </div>
       </div>
-      <Button onClick={handleBack} variant="contained">Back</Button>
-
-
+      <Button onClick={handleBack} variant="contained">
+        Back
+      </Button>
     </div>
   );
 }

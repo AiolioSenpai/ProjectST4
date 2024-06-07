@@ -1,154 +1,173 @@
 .movie-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 2000px;
-    padding: 20px;
-    margin: 0 auto;
-    background-color: #0f2c43;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 2000px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #0f2c43;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align items to the start and end */
+  margin-bottom: 20px;
+}
+
+.movie-titledets {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #a70000;
+}
+
+.movie-vote {
+  font-size: 1.5em;
+  color: #ffffff;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 5px;
+  align-items: center;
+}
+
+.star-icon {
+  color: #ffd700; /* Gold color */
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.movie-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.movie-media {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-poster {
+  width: 100%;
+  max-width: 300px;
+  max-height: 450px;
+  border-radius: 10px;
+  margin-right: 25px;
+}
+
+.movie-trailer {
+  text-align: center;
+}
+
+.movie-trailer iframe {
+  width: 100%;
+  width: 720px;
+  height: 450px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-rate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-left: 610px;
+  width: 100%;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.movie-release-date {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.movie-overview {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: justify;
+  color: #ffffff;
+}
+
+.movie-actors {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.movie-actors h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.movie-actors ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-actors li {
+  margin: 5px 10px;
+  font-size: 1.1em;
+  color: #ffffff;
+}
+
+.movie-genres {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.genres-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.genre-tag {
+  background-color: #acc8e5;
+  color: #112a46;
+  padding: 5px 10px;
+  max-height: 30px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .movie-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Align items to the start and end */
-    margin-bottom: 20px;
+  to {
+    transform: rotate(360deg);
   }
-  
-  .movie-titledets {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #a70000;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
   }
-  
-  .movie-vote {
-    font-size: 1.5em;
-    color: #ffffff;
-    display: flex;
-    margin-top: 10px;
-    margin-left: 5px;
-    align-items: center;
-  }
-  
-  .star-icon {
-    color: #FFD700; /* Gold color */
-    align-items: center;
-    margin-left: 10px;
-    margin-right: 5px;
-  }
-  
-  .movie-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .movie-media {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .movie-poster {
-    width: 100%;
-    max-width: 300px;
-    max-height: 450px;
-    border-radius: 10px;
-    margin-right: 25px;
-  }
-  
-  .movie-trailer {
-    text-align: center;
-  }
-  
-  .movie-trailer iframe {
-    width: 100%;
-    width: 720px;
-    height: 450px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .movie-rate {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 10px;
-    margin-left: 610px;
-    width: 100%;
-  }
-  
-  .movie-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .movie-release-date {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    color: #ffffff;
-  }
-  
-  .movie-overview {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    text-align: justify;
-    color: #ffffff;
-  }
-  
-  .movie-actors {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .movie-actors h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  .movie-actors ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .movie-actors li {
-    margin: 5px 10px;
-    font-size: 1.1em;
-    color: #ffffff;
-  }
-  
-  .movie-genres {
-    margin-top: 20px;
-    margin-left: 20px;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .genres-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .genre-tag {
-    background-color: #ACC8E5;
-    color: #112A46;
-    padding: 5px 10px;
-    max-height: 30px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    display: inline-block;
-  }
-  
+}
