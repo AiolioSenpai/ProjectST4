@@ -38,7 +38,6 @@ router.get('/recommend', async (req, res) => {
   }
 });
 
-
 router.get('/cast', async (req, res) => {
   const id_movie = parseInt(req.query.id_movie);
   console.log({ id_movie });
@@ -83,26 +82,39 @@ router.get('/genre', async (req, res) => {
   }
 });
 
-router.post('/new', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    console.log(req.body);
-
-    const newMovie = movieRepository.create({
-      id_movie: req.body.id_movie,
-      title: req.body.title,
-      release_date: req.body.release_date,
-      description: req.body.description,
-      trailer: req.body.trailer,
-      image: req.body.image,
-      rating_tmdb: req.body.rating_tmdb,
+    const allMovies = await movieRepository.find();
+    res.json(allMovies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
     });
+  }
+});
 
-    await movieRepository.insert(newMovie);
+router.get('/movies-with-genres', async (req, res) => {
+  console.log('helo');
+  try {
+    // Fetch all movies with their genres
+    const movies = await movieRepository.find({ relations: ['movie_genre'] });
 
-    res.status(201).json({
-      message: 'HTTP 201 Created',
-      movie: newMovie,
+    res.json(movies);
+  } catch (error) {
+    console.error('Error fetching movies with genres:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/movie', async (req, res) => {
+  console.log('helo');
+  try {
+    console.log(req.query.id_movie);
+    const allMovies = await movieRepository.findOne({
+      where: { id_movie: req.query.id_movie },
     });
+    res.json(allMovies);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -147,43 +159,32 @@ router.delete('/:movieId', function (req, res) {
     });
 });
 
-
-router.get('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
-    const allMovies = await  movieRepository.find()
-    res.json(allMovies)
-  
+    console.log(req.body);
+
+    const newMovie = movieRepository.create({
+      id_movie: req.body.id_movie,
+      title: req.body.title,
+      release_date: req.body.release_date,
+      description: req.body.description,
+      trailer: req.body.trailer,
+      image: req.body.image,
+      rating_tmdb: req.body.rating_tmdb,
+    });
+
+    await movieRepository.insert(newMovie);
+
+    res.status(201).json({
+      message: 'HTTP 201 Created',
+      movie: newMovie,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-        message: 'Internal Server Error',
+      message: 'Internal Server Error',
     });
-}
-});
-
-
-router.get('/movies-with-genres', async (req, res) => {
-  try {
-    // Fetch all movies with their genres
-    const movies = await movieRepository.find({ relations: ['movie_genre'] });
-
-    res.json(movies);
-  } catch (error) {
-    console.error('Error fetching movies with genres:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
   }
-});
-router.get('/movie', async (req, res) => {
-  try {
-    console.log(req.query.id_movie)
-    const allMovies = await  movieRepository.findOne({where: { id_movie:req.query.id_movie }})
-    res.json(allMovies)
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-        message: 'Internal Server Error',
-    });
-}
 });
 
 export default router;
