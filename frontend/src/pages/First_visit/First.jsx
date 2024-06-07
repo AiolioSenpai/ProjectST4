@@ -118,7 +118,6 @@ function First() {
   };
 
   const handleInputFocus = () => {
-    setShowSuggestions(true);
     setFilteredSuggestions(
       genresSuggestions.filter(
         (genre) => !tags.find((tag) => tag.text === genre.text)
@@ -166,6 +165,13 @@ function First() {
       (movie) => movie.title === e.value
     );
   };
+  if (movies.length === 0) {
+    return (
+      <div className="App">
+        <h1>Loading ...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="App">

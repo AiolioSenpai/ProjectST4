@@ -32,8 +32,8 @@ const Login = () => {
   return (
     <Container maxWidth="xs">
       <Box mt={8} display="flex" flexDirection="column" alignItems="center">
-        <Typography component="h1" variant="h5">
-          Login
+        <Typography color="Black" component="h1" variant="h5">
+          <b>MovieMuse</b>: Login Page
         </Typography>
         <form onSubmit={handleLogin} style={{ width: '100%', marginTop: 1 }}>
           <TextField

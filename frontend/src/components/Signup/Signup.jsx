@@ -40,8 +40,8 @@ const Signup = () => {
   return (
     <Container maxWidth="xs">
       <Box mt={8} display="flex" flexDirection="column" alignItems="center">
-        <Typography component="h1" variant="h5">
-          Sign Up
+        <Typography color="black" component="h1" variant="h5">
+          <b>MovieMuse</b>: Sign Up Page
         </Typography>
         <form onSubmit={handleSignup} style={{ width: '100%', marginTop: 1 }}>
           <TextField
