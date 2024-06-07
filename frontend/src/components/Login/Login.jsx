@@ -19,7 +19,8 @@ const Login = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
-        { email, password }
+        { email: email,
+          password: password }
       );
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user_id', response.data.user.id_user); // store user_id

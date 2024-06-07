@@ -23,10 +23,10 @@ const Signup = () => {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/signup`,
         {
-          email,
-          firstname,
-          lastname,
-          password,
+          email: email,
+          firstname: firstname,
+          lastname: lastname,
+          password: password
         }
       );
       localStorage.setItem('token', response.data.token);
