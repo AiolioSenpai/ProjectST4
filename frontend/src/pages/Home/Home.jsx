@@ -7,7 +7,7 @@ import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
 import moviemuselogo from './assets/logo-movieMuse-blanc.png';
-import logo from './logo.svg';
+import logo from './load.png';
 
 import 'primereact/resources/themes/saga-blue/theme.css'; // PrimeReact theme
 import 'primereact/resources/primereact.min.css'; // PrimeReact core CSS
@@ -142,7 +142,8 @@ function Home() {
   if (movies.length === 0) {
     return (
       <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={moviemuselogo} className="moviemuse-logo" style={{ maxWidth: '150px', maxHeight: '150px' }} />
+        <img src={logo} className="App-logo" alt="logo"  style={{ maxWidth: '100px', maxHeight: '100px' }}/>
         <h2>
           Please wait while we cook you the best movie recommention list ...
         </h2>
