@@ -59,14 +59,26 @@ function norme(object) {
 
 function score(user_object, movie_object) {
   let score_ = 0;
+  let userNorm = 0;
+  let movieNorm = 0;
+
   for (const property in user_object) {
-    score_ += user_object[property] * movie_object[property];
+    const userValue = user_object[property];
+    const movieValue = movie_object[property];
+    
+    score_ += userValue * movieValue;
+    userNorm += userValue * userValue;
+    movieNorm += movieValue * movieValue;
   }
-  score_ /= norme(user_object);
-  score_ /= norme(movie_object);
+
+  userNorm = Math.sqrt(userNorm);
+  movieNorm = Math.sqrt(movieNorm);
+
+  score_ /= userNorm * movieNorm;
 
   return score_;
 }
+
 
 async function getRecommendationForUser(user_id) {
   console.log(user_id);
