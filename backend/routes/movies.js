@@ -13,9 +13,10 @@ router.get('/recommend', async (req, res) => {
     const recommended_movie_ids = await getRecommendationForUser(
       req.query.id_user
     );
-    const recommendation = await movieRepository.findByIds(
-      recommended_movie_ids.map((id) => parseInt(id))
-    );
+    const recommendation = await movieRepository.find({
+      where: { id_movie: In(recommended_movie_ids) },
+      relations: ['movie_genre'],
+    });
     const movie_id_to_order = new Map();
     for (let i = 0; i < recommended_movie_ids.length; i++) {
       movie_id_to_order.set(recommended_movie_ids[i], i);

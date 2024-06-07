@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import RatingButtons from '../../components/RatingButtons/RatingButtons';
 import ActorsImageList from '../../components/ActorsImageList/ActorsImageList';
 import { useFetchMovies } from '../Home/useFetchmovies.js';
+import { Button } from 'primereact/button';
 import './movieDetails.css';
 
 function MovieDetails() {
   console.log('hello');
+  const navigate=useNavigate();
   const { movieId } = useParams();
   const userId = localStorage.getItem('user_id');
   //console.log(id);
@@ -76,6 +78,7 @@ function MovieDetails() {
       setThumbsDownClicked(true);
     }
 
+
     // const foundMovie = movies.find(m => m.id === parseInt(id));
     // setMovie(foundMovie);
     console.log(movie);
@@ -116,6 +119,9 @@ function MovieDetails() {
           setThumbsDownClicked(false);
         });
     }
+  };
+  const handleBack = () => {
+    navigate('/home'); // Navigate to the home page
   };
 
   const handleThumbsDown = () => {
@@ -211,6 +217,9 @@ function MovieDetails() {
           </div>
         </div>
       </div>
+      <Button onClick={handleBack} variant="contained">Back</Button>
+
+
     </div>
   );
 }

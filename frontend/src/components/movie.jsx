@@ -36,8 +36,9 @@ function Movie({ movie }) {
     <div className="App-movie"
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
+    
     >
-      <img src={posterUrl} alt={movie.title} onClick={handleClick} />
+      <img src={posterUrl} alt={movie.title} onClick={handleClick} className={hover ? 'hovered' : ''} />
       {hover && (
         <div className="movie-info-hover">
           <p className="movie-title-hover">{movie.title}</p>
