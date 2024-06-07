@@ -27,9 +27,6 @@ function Home() {
   const { genresSuggestions } = useFetchGenres();
   const navigate = useNavigate();
   const [displayedMovies, setDisplayedMovies] = useState(36);
-  const moviesToDisplay = Object.values(movies).slice(0, displayedMovies);
-
-  console.log(movies);
   const [tags, setTags] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -241,6 +238,7 @@ function Home() {
                     )
                   )
               )
+              .slice(0, displayedMovies)
               .map((movie, index) => (
                 <Movie key={index} movie={movie} />
               ))}
