@@ -96,7 +96,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/movies-with-genres', async (req, res) => {
-  console.log('helo');
   try {
     // Fetch all movies with their genres
     const movies = await movieRepository.find({ relations: ['movie_genre'] });
@@ -109,7 +108,6 @@ router.get('/movies-with-genres', async (req, res) => {
 });
 
 router.get('/movie', async (req, res) => {
-  console.log('helo');
   try {
     console.log(req.query.id_movie);
     const allMovies = await movieRepository.findOne({
