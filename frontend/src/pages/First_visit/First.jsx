@@ -197,6 +197,7 @@ useEffect(() => {
             handleInputChange={handleTagInputChange}
             handleInputFocus={handleInputFocus}
             handleInputBlur={handleInputBlur}
+            placeholder="Choose from the available genres"
           />
           {showSuggestions && filteredSuggestions.length > 0 && (
             <div className="suggestions-dropdown">

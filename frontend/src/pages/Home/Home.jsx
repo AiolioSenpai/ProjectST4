@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
+import { Button } from 'primereact/button';
 import Movie from '../../components/movie';
 import { Dropdown } from 'primereact/dropdown';
 
@@ -31,6 +32,11 @@ function Home() {
   const [tags, setTags] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+
+  // Reset displayedMovies to its initial value when the component mounts
+  useEffect(() => {
+    setDisplayedMovies(36);
+  }, []);
 
   useEffect(() => {
     setFilteredSuggestions(genresSuggestions.filter(
@@ -147,7 +153,7 @@ function Home() {
           options={dropdownOptions} 
           onChange={handleDropdownChange} 
           editable 
-          placeholder="Rechercher un film..." 
+          placeholder="Search a movie..." 
         />
         <div>
       {/* <TagsInput
@@ -157,7 +163,7 @@ function Home() {
         placeHolder="enter Genre"
       /> */}
     </div>
-        <div className="tag-input-wrapper">
+        <div className="tag-input-wrapper" style={{ zIndex: 1000 }}>
           <ReactTagInput
             // className="custom-tags"
             tags={tags}
@@ -173,6 +179,7 @@ function Home() {
             handleInputChange={handleTagInputChange}
             handleInputFocus={handleInputFocus}
             handleInputBlur={handleInputBlur}
+            placeholder="Choose from the available genres"
           />
           {showSuggestions && filteredSuggestions.length > 0 && (
             <div className="suggestions-dropdown">
@@ -195,14 +202,14 @@ function Home() {
           className="p-button-outlined"
         /> */}
       </div>
-      {movies.filter(movie => 
+      {moviesToDisplay.filter(movie => 
       (
         movie.title.toLowerCase().includes(searchQuery.toLowerCase()))&&
         (tags.every(element => movie.movie_genre.some(e => parseInt(e.id_genre) === parseInt(element.id))))
     ).length > 0 ? (
         <ul className='App-movies'>
           {
-          movies.filter(
+          moviesToDisplay.filter(
             movie => (movie.title.toLowerCase().includes(searchQuery.toLowerCase()))&&
         (tags.every(element => movie.movie_genre.some(e => parseInt(e.id_genre) === parseInt(element.id))))).map((movie, index) => (
 
