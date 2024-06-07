@@ -111,7 +111,6 @@ function Home() {
   };
 
   const handleInputFocus = () => {
-    setShowSuggestions(true);
     setFilteredSuggestions(
       genresSuggestions.filter(
         (genre) => !tags.find((tag) => tag.text === genre.text)
