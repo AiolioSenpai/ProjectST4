@@ -7,7 +7,7 @@ import Layout from './components/Layout/Layout';
 import MovieDetails from './pages/movieDetails/movieDetails';
 import Users from './pages/Users/Users';
 import Login from './components/Login/Login';
-import Signup from './components/Signup/Signup'         ;
+import Signup from './components/Signup/Signup';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -26,31 +26,21 @@ function App() {
         }
       />
       <Route
+        path="/first"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <First />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+      <Route
         path="/movieDetails/:movieId"
         element={
           <PrivateRoute>
             <Layout>
               <MovieDetails />
-            </Layout>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/users"
-        element={
-          <PrivateRoute>
-            <Layout>
-              <Users />
-            </Layout>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/about"
-        element={
-          <PrivateRoute>
-            <Layout>
-              <About />
             </Layout>
           </PrivateRoute>
         }
