@@ -6,6 +6,7 @@ import { WithContext as ReactTagInput } from 'react-tag-input';
 import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
+import moviemuselogo from './assets/logo-movieMuse-blanc.png';
 import logo from './logo.svg';
 
 import 'primereact/resources/themes/saga-blue/theme.css'; // PrimeReact theme
@@ -151,7 +152,10 @@ function Home() {
 
   return (
     <div className="App">
-      <header className="App-header">Welcome to MovieMuse</header>
+      <header className="App-header">
+        <img src={moviemuselogo} className="moviemuse-logo" style={{ maxWidth: '150px', maxHeight: '150px' }} />
+        <h1>Welcome to MovieMuse</h1>
+        </header>
       <div>
         <Dropdown
           className="custom-dropdown"

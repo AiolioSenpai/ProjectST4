@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import moviemuselogo from '../../pages/Home/assets/logo-movieMuse.png';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -40,6 +41,7 @@ const Signup = () => {
   return (
     <Container maxWidth="xs">
       <Box mt={8} display="flex" flexDirection="column" alignItems="center">
+      <img src={moviemuselogo} alt="MovieMuse" style={{ maxWidth: '150px', maxHeight: '150px' }} />
         <Typography color="black" component="h1" variant="h5">
           <b>MovieMuse</b>: Sign Up Page
         </Typography>
