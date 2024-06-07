@@ -30,10 +30,10 @@ After completing the installation steps, you can run the application by followin
 3. Open your web browser and go to `http://localhost:3000` to view the application.
 
 ### Seeding the DataBase:
-```
-node -r dotenv/config seedMovies.js
 
-```
+```node -r dotenv/config seedMovies.js```
+
+
 
 ### Install the English language package for the NLP.js library 
 ```npm install @nlpjs/lang-en```
