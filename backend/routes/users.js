@@ -45,11 +45,12 @@ router.get('/home/:id_user', async (req, res) => {
 });
 
 router.get('/ratings', async (req, res) => {
-  const userId = parseInt(req.query.id);
+  const userId = parseInt(req.query.id_user);
   console.log('Requested User ID:', userId);
 
   if (isNaN(userId)) {
-    return res.status(400).json({ message: 'Invalid user ID' });
+    res.status(400).json({ message: 'Invalid user ID' });
+    return null
   }
 
   try {
@@ -63,6 +64,31 @@ router.get('/ratings', async (req, res) => {
     }
 
     res.json(user.movies_rates);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+      details: err.message,
+    });
+  }
+});
+router.get('/rating/movie', async (req, res) => {
+  const { id_user, id_movie } = req.query;
+
+  if (!id_user || !id_movie) {
+    return res.status(400).json({ message: 'Missing user_id or id_movie' });
+  }
+
+  try {
+    const rating = await ratingRepository.findOne({
+      where: { id_user: parseInt(id_user), id_movie: parseInt(id_movie) },
+    });
+
+    if (!rating) {
+      return res.status(404).json({ message: 'Rating not found' });
+    }
+
+    res.json(rating);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -113,6 +139,61 @@ router.post('/ratings', async (req, res) => {
   }
 });
 
+router.delete('/ratings', async (req, res) => {
+  const { id_user, id_movie } = req.body;
+
+  if (!id_user || !id_movie) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    // Check if the rating exists
+    const rating = await ratingRepository.findOne({ where: { id_user: id_user, id_movie: id_movie } });
+    if (!rating) {
+      return res.status(404).json({ message: 'Rating not found' });
+    }
+
+    // Delete the rating
+    await ratingRepository.remove(rating);
+
+    res.status(200).json({ message: 'Rating deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+      details: err.message,
+    });
+  }
+});
+
+
+
+router.delete('/rating', async (req, res) => {
+  const { id_user, id_movie } = req.body;
+
+  if (!id_user || !id_movie) {
+    return res.status(400).json({ message: 'User ID and Movie ID are required' });
+  }
+
+  try {
+
+    const rating = await ratingRepository.findOne({ where: { id_user: id_user, id_movie: id_movie } });
+
+    if (!rating) {
+      return res.status(404).json({ message: 'Rating not found' });
+    }
+
+    await ratingRepository.remove(rating);
+
+    res.json({ message: 'Rating deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Internal Server Error',
+      details: err.message,
+    });
+  }
+});
 router.post('/new', function (req, res) {
   //const userRepository = appDataSource.getRepository(User);
   const newUser = userRepository.create({

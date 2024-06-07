@@ -37,20 +37,7 @@ router.get('/recommend', async (req, res) => {
     });
   }
 });
-router.get('/movie', async (req, res) => {
-  try {
-    console.log(req.query.id_movie);
-    const allMovies = await movieRepository.findOne({
-      where: { id_movie: req.query.id_movie },
-    });
-    res.json(allMovies);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      message: 'Internal Server Error',
-    });
-  }
-});
+
 
 router.get('/cast', async (req, res) => {
   const id_movie = parseInt(req.query.id_movie);
@@ -158,6 +145,45 @@ router.delete('/:movieId', function (req, res) {
     .catch(function () {
       res.status(404).json({ message: 'HTTP 404 Not Found' });
     });
+});
+
+
+router.get('/', async (req, res) => {
+  try {
+    const allMovies = await  movieRepository.find()
+    res.json(allMovies)
+  
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+        message: 'Internal Server Error',
+    });
+}
+});
+
+
+router.get('/movies-with-genres', async (req, res) => {
+  try {
+    // Fetch all movies with their genres
+    const movies = await movieRepository.find({ relations: ['movie_genre'] });
+
+    res.json(movies);
+  } catch (error) {
+    console.error('Error fetching movies with genres:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/movie', async (req, res) => {
+  try {
+    console.log(req.query.id_movie)
+    const allMovies = await  movieRepository.findOne({where: { id_movie:req.query.id_movie }})
+    res.json(allMovies)
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+        message: 'Internal Server Error',
+    });
+}
 });
 
 export default router;
