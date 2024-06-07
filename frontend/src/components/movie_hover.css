@@ -1,31 +1,31 @@
 .App-movie {
-    position: relative;
-    flex: 1 0 150px;
-    max-width: 200px;
-  }
-  
-  .movie-info-hover {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-    .movie-title-hover {
-        font-size: 12px;
-        font-weight: bold;
-        margin: 5px 0; /* Add some margin for spacing */
-        color: #ffffff; /* White color */
-        text-align: center; /* Center align the text */
-    }
-    
-    .movie-release-date-hover {
-        font-size: 10px;
-        margin: 0; /* Remove default margin */
-        color: #dddddd; /* Light gray color */
-        text-align: center; /* Center align the text */
-  }
+  position: relative;
+  flex: 1 0 150px;
+  max-width: 200px;
+}
+
+.movie-info-hover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.movie-title-hover {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0; /* Add some margin for spacing */
+  color: #ffffff; /* White color */
+  text-align: center; /* Center align the text */
+}
+
+.movie-release-date-hover {
+  font-size: 10px;
+  margin: 0; /* Remove default margin */
+  color: #dddddd; /* Light gray color */
+  text-align: center; /* Center align the text */
+}
