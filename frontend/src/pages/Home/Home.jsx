@@ -143,7 +143,7 @@ function Home() {
     return (
       <div className="App">
         <img src={moviemuselogo} className="moviemuse-logo" style={{ maxWidth: '150px', maxHeight: '150px' }} />
-        <img src={logo} className="App-logo" alt="logo"  style={{ maxWidth: '100px', maxHeight: '100px' }}/>
+        <img src={logo} className="App-logo" alt="logo"  style={{ marginTop:'200px', maxWidth: '100px', maxHeight: '100px' }}/>
         <h2>
           Please wait while we cook you the best movie recommention list ...
         </h2>
