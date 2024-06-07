@@ -31,7 +31,7 @@ const Signup = () => {
       );
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user_id', response.data.user.id_user); // store user_id
-      navigate('/home');
+      navigate('/first');
     } catch (error) {
       console.error('There was an error signing up!', error);
     }

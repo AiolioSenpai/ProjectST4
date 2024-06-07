@@ -6,6 +6,7 @@ import { WithContext as ReactTagInput } from 'react-tag-input';
 import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
+import logo from './logo.svg';
 
 import 'primereact/resources/themes/saga-blue/theme.css'; // PrimeReact theme
 import 'primereact/resources/primereact.min.css'; // PrimeReact core CSS
@@ -52,8 +53,6 @@ function Home() {
     );
     if (matchingMovies.length > 0) {
       navigate(`/movieDetails/${matchingMovies[0].id_movie}`);
-      //navigate(`/movieDetails/${matchingMovies[0].id}`);
-      navigate(`/movieDetails/${matchingMovies[0].id_movie}`);
     }
   };
 
@@ -71,8 +70,6 @@ function Home() {
     setSearchQuery(e.value);
     const selectedMovie = movies.find((movie) => movie.title === e.value);
     if (selectedMovie) {
-      console.log(selectedMovie.id);
-      navigate(`/movieDetails/${selectedMovie.id_movie}`);
       navigate(`/movieDetails/${selectedMovie.id_movie}`);
     }
   };
@@ -145,6 +142,16 @@ function Home() {
       setShowSuggestions(true);
     }
   };
+  if (movies.length === 0) {
+    return (
+      <div className="App">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>
+          Please wait while we cook you the best movie recommention list ...
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
@@ -158,14 +165,14 @@ function Home() {
           editable
           placeholder="Search for a movie..."
         />
-        <Button
+        {/*<Button
           label="Search"
           icon="pi pi-search"
           options={dropdownOptions}
           onChange={handleDropdownChange}
           editable
           placeholder="Rechercher un film..."
-        />
+        />*/}
         <div>
           {/* <TagsInput
         value={tags}

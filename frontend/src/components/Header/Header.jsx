@@ -16,14 +16,6 @@ const Header = () => {
         Home
       </Link>
       <div>|</div>
-      <Link className="Link" to="/users">
-        Account
-      </Link>
-      <div>|</div>
-      <Link className="Link" to="/about">
-        About
-      </Link>
-      <div>|</div>
       <Link className="Link" to="/login" onClick={handleLogout}>
         Log out
       </Link>
