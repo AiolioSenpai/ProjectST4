@@ -46,7 +46,7 @@ async function fetchMoviesFromApi() {
         description: response.data.overview,
         image: response.data.poster_path,
         genres: response.data.genres,
-        rating_tmdb: response.data.popularity,
+        rating_tmdb: response.data.vote_average,
       });
     } catch (error) {
       console.error('Error fetching data from API:', error);
