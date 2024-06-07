@@ -5,6 +5,8 @@ import { useFetchGenres } from './useFetchGenres';
 import { Button } from 'primereact/button';
 import Movie from '../../components/movie';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+
 
 import { WithContext as ReactTagInput } from 'react-tag-input';
 
