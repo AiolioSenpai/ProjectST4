@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-import { Dropdown } from 'primereact/dropdown';
-import { Button } from 'primereact/button';
-import { useFetchMovies } from './useFetchmovies';
-import Movie from '../../components/movie';
-=======
 import { useFetchMovies } from './useFetchmovies';
 import { useFetchGenres } from './useFetchGenres';
 import Movie from '../../components/movie';
@@ -15,7 +9,6 @@ import { Button } from 'primereact/button';
 
 import { WithContext as ReactTagInput } from 'react-tag-input';
 
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
 import 'primereact/resources/themes/saga-blue/theme.css'; // PrimeReact theme
 import 'primereact/resources/primereact.min.css'; // PrimeReact core CSS
 import 'primeicons/primeicons.css'; // PrimeIcons
@@ -29,16 +22,11 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 function Home() {
-<<<<<<< HEAD
   const [searchQuery, setSearchQuery] = useState('');
   const id_user = localStorage.getItem('user_id');
   console.log(id_user, 'hiiii');
   const { movies } = useFetchMovies(id_user);
-=======
-  const [searchQuery, setSearchQuery] = useState("");
-  const { movies } = useFetchMovies();
   const { genresSuggestions } = useFetchGenres();
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
   const navigate = useNavigate();
   const [displayedMovies, setDisplayedMovies] = useState(36); 
   const moviesToDisplay = Object.values(movies).slice(0, displayedMovies);
@@ -59,52 +47,25 @@ function Home() {
   };
 
   const handleSearchSubmit = () => {
-<<<<<<< HEAD
-    // Find the corresponding movie object based on the search query
-    const matchingMovies = Object.values(movies).filter((movie) =>
-=======
     const matchingMovies = movies.filter(movie =>
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
       movie.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     if (matchingMovies.length > 0) {
       navigate(`/movieDetails/${matchingMovies[0].id_movie}`);
-<<<<<<< HEAD
-      //navigate(`/movieDetails/${matchingMovies[0].id}`);
-    }
-  };
-
-  // Filter dropdown options based on search query
-  const dropdownOptions = Object.values(movies)
-    .filter((movie) =>
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .map((movie) => ({
-=======
     }
   };
 
   const dropdownOptions = movies
     .filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
     .map(movie => ({
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
       label: movie.title,
       value: movie.title,
     }));
 
   const handleDropdownChange = (e) => {
-<<<<<<< HEAD
-    setSearchQuery(e.value); // Update search query based on selected movie title
-    const selectedMovie = Object.values(movies).find(
-      (movie) => movie.title === e.value
-    );
-    if (selectedMovie) {
-      console.log(selectedMovie.id);
-=======
     setSearchQuery(e.value);
     const selectedMovie = movies.find(movie => movie.title === e.value);
     if (selectedMovie) {
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
       navigate(`/movieDetails/${selectedMovie.id_movie}`);
     }
   };
@@ -185,20 +146,10 @@ function Home() {
         <Dropdown
           className="custom-dropdown"
           value={searchQuery}
-<<<<<<< HEAD
-          options={dropdownOptions}
-          onChange={handleDropdownChange}
-          editable
-          placeholder="Search for a movie..."
-        />
-        <Button
-          label="Search"
-          icon="pi pi-search"
-=======
           options={dropdownOptions} 
           onChange={handleDropdownChange} 
           editable 
-          placeholder="Rechercher un film..." 
+          placeholder="Search a movie..." 
         />
         <div>
       {/* <TagsInput
@@ -242,24 +193,10 @@ function Home() {
         {/* <Button 
           label="Rechercher" 
           icon="pi pi-search" 
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
           onClick={handleSearchSubmit}
           className="p-button-outlined"
         /> */}
       </div>
-<<<<<<< HEAD
-      {Object.values(movies).filter((movie) =>
-        movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-      ).length > 0 ? (
-        <ul className="App-movies">
-          {Object.values(movies)
-            .filter((movie) =>
-              movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-            .map((movie, index) => (
-              <Movie key={index} movie={movie} id_user={id_user} />
-            ))}
-=======
       <div className='Movie-Grid'>
       {movies.filter(movie => 
       (
@@ -274,7 +211,6 @@ function Home() {
 
             <Movie key={index} movie={movie}/>
           ))}
->>>>>>> 654439958ae9f78188c3ee3a5c04fe809314a9a5
         </ul>
       ) : (
         <p>Pas de résultats trouvés pour {searchQuery}</p>

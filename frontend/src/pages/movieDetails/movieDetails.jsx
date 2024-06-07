@@ -60,7 +60,7 @@ function MovieDetails() {
       .get(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/users/rating/movie?id_movie=${id}&id_user=1`
+        }/users/rating/movie?id_movie=${movieId}&id_user=${userId}`
       )
       .then((response) => {
         console.log(response.data);
