@@ -176,7 +176,7 @@ function First() {
   return (
     <div className="App">
       <header className="App-header">
-        Please choose 7 movies you like from the list above :
+        Please choose at least 5 movies you like from the list above :
       </header>
       <div>
         <Dropdown
@@ -260,7 +260,7 @@ function First() {
       ) : (
         <p>No results for {searchQuery}</p>
       )}
-      {ratedMoviesCount >= 7 ? (
+      {ratedMoviesCount >= 5 ? (
         <Button
           label="Done"
           onClick={handleRedirect}
